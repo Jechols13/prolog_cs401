@@ -27,6 +27,9 @@ read_stmts(List) :-
                 (X == "bad") -> write('Will food make it better?');
                 (X == "yes") -> write('Perfect!');
                 (X == "birthday") -> write('Happy birthday!');
+                (X == "sports") -> write('I see your a sports fan. I must ask, Auburn or Alabama?');
+                (X == "auburn") -> write('WAR EAGLE!');
+                (X == "alabama") -> write('ROLL TIDE!');
                 (X == "beautiful") -> write('Looks can be decieving someimes.');
                 (X == "no") -> write('Sorry I couldnt help');
                 (X == "sick") -> write('Get well soon.');
