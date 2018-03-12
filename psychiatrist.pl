@@ -2,18 +2,18 @@
 
 main :-
         write('Welcome to Branwins therapy. Please enter all sentences with quotation marks. Eneter in QUIT at any point, after your name, in time to exit.'),nl,
-        write('--> --> --> --> --> --> --> --> --> --> --> --> --> --> -->'), nl, 
-        write('--> --> --> --> --> --> --> --> --> --> --> --> --> --> -->'), nl,
+        write('---------------------------------------------'), nl, 
+        write('---------------------------------------------'), nl,
         write('Hi, what is your name?'),nl,
         read(_Input),
         write('Hello, ' ), write(_Input), write(', how are you today?'),nl,
         keep_going.
 
-keep_going :- %figure out a way to loop this and keep reading in input
+keep_going :-  %loop this and keep reading in input
         read(Y),
         string_lower(Y,Lowercase),
-        split_string(Lowercase, ' ',' ', List),
-        (read_stmts(List),nl; write("I dont understand. Tell me more."),nl),
+        split_string(Lowercase, ' ','. ? ! ', List), write(List),nl, %first split at whitespaces, else split at punctuation
+        (read_stmts(List),nl ;  write("I dont understand. Tell me more."),nl),
         keep_going.
 
 read_stmts(List) :-
@@ -27,6 +27,8 @@ read_stmts(List) :-
                 (X == "bad") -> write('Will food make it better?');
                 (X == "yes") -> write('Perfect!');
                 (X == "birthday") -> write('Happy birthday!');
+                (X == "uab") -> write('SWEET! I know a cool guy named Muhammad that goes there.');
+                (X =="school") -> write('What school do you attend?');
                 (X == "sports") -> write('I see your a sports fan. I must ask, Auburn or Alabama?');
                 (X == "auburn") -> write('WAR EAGLE!');
                 (X == "alabama") -> write('ROLL TIDE!');
