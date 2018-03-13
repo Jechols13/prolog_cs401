@@ -1,0 +1,42 @@
+:-style_check(-singleton).
+
+main :-
+        write('Welcome to Branwins therapy. Please enter all sentences with quotation marks. Eneter in QUIT at any point, after your name, in time to exit.'),nl,
+        write('---------------------------------------------'), nl, 
+        write('---------------------------------------------'), nl,
+        write('Hi, what is your name?'),nl,
+        read(_Input),
+        write('Hello, ' ), write(_Input), write(', how are you today?'),nl,
+        keep_going.
+
+keep_going :-  %loop this and keep reading in input
+        read(Y),
+        string_lower(Y,Lowercase),
+        split_string(Lowercase, ' ','. ? ! ', List), write(List),nl, %first split at whitespaces, else split at punctuation
+        (read_stmts(List),nl ;  write("I dont understand. Tell me more."),nl),
+        keep_going.
+
+read_stmts(List) :-
+        ((nth0(Index, List, X, R),nth0(Index, R, Y, R1)); %find first and second word (if it exists) OR
+        nth0(Index, List, X, R)), %finds first word. AND
+        (
+                ((X == "this"), (Y == "is")) -> write('What else do you regard as too much?');
+                ((X == "mother"); (X == "father"); (X == "sister"); (X == "brother")) -> write('Tell me more about your family');
+                (X == "why") -> write('Why should you what?');
+                (X == "good") -> write('Thats good to hear!');
+                (X == "bad") -> write('Will food make it better?');
+                (X == "yes") -> write('Perfect!');
+                (X == "birthday") -> write('Happy birthday!');
+                (X == "uab") -> write('SWEET! I know a cool guy named Muhammad that goes there.');
+                (X =="school") -> write('What school do you attend?');
+                (X == "sports") -> write('I see your a sports fan. I must ask, Auburn or Alabama?');
+                (X == "auburn") -> write('WAR EAGLE!');
+                (X == "alabama") -> write('ROLL TIDE!');
+                (X == "beautiful") -> write('Looks can be decieving someimes.');
+                (X == "no") -> write('Sorry I couldnt help');
+                (X == "sick") -> write('Get well soon.');
+                ((X == "thank"); (X == "thanks")) -> write('My pleasure.');
+                (X == "quit") ->write('Nice conversation, chat later!'), nl, halt()
+        );
+        % if X not the end of list continue, otherwise propmt for more input
+        (not(last(R,X)), read_stmts(R)).
