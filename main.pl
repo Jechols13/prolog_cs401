@@ -3,52 +3,6 @@
 :- dynamic is_a/2.
 % TODO: need a way to check if x is a z by finding a y so that x is a y and y is a z.
 
-main :-
-    prompt1("> "),
-    read(X),
-    write(X),
-    term_string(X, STR),
-    string_length(STR, LEN),
-    LEN_MINUS_ONE is LEN-1,
-    sub_string(STR, LEN_MINUS_ONE, 1, 0, PUNCT),
-    write(PUNCT),
-    main.
-
-    %(PUNCT is "." ->
-    % the next part will be either input or query,
-    % We will base this on 
-    % input
-    %atomic_list_concat([N1, N2], ' is a ', X),
-    %assert(is_a(N1, N2)),
-    %write("Ok."),
-    %nl,
-    %main_loop;
-
-    %PUNCT is "?" ->
-    % query
-    % We'll need to write one of these as a response, to be changed.
-    %write("Yes."); write("No."); write("Unknown."),
-    %nl,
-    %main. 
-
-
-last_char(STR) :-
-    string_length(STR, LEN),
-    LEN_MINUS_ONE is LEN -2,
-    sub_string(STR, LEN_MINUS_ONE, 1, 0, PUNCT),
-    write(PUNCT), nl.
-
-str_test() :-
-    read_line_to_codes(user_input, X),
-    term_string(X, STR),
-    last_char(STR),
-    (string(STR) ->
-        write("X is a string."),nl;
-     compound(STR) ->
-        write(STR),nl;
-     atom(STR) ->
-        write("X is atom.")).
-
 new_main :-
     write("> "),
     read_line_to_codes(user_input, Input),
@@ -94,8 +48,3 @@ type_is_query(Input) :-
     is_I(FirstCode).
 
 % maybe this offers some insight: https://stackoverflow.com/questions/37380645/prolog-type-errors-with-dcg-library-functions
-
-
-some_glue :-
-    write("This was true"); write("This was false").
-% prolog if then else https://stackoverflow.com/questions/2849045/if-in-prolog
