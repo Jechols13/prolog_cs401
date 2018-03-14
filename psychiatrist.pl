@@ -20,7 +20,7 @@ read_stmts(List) :-
         ((nth0(Index, List, X, R),nth0(Index, R, Y, R1)); %find first and second word (if it exists) OR
         nth0(Index, List, X, R)), %finds first word. AND
         (
-                ((X == "this"), (Y == "is")) -> write('What else do you regard as too much?');
+                ((X == "this"), (Y == "is")) -> write('What else do you regard as '),atomic_list_concat(R1, ' ', Atom), atom_string(Atom, String), write(String), write('?');
                 ((X == "mother"); (X == "father"); (X == "sister"); (X == "brother")) -> write('Tell me more about your family');
                 (X == "why") -> write('Why should you what?');
                 (X == "good") -> write('Thats good to hear!');
