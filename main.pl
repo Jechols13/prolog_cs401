@@ -25,14 +25,17 @@ stmt(IA) :-
     atomic_list_concat(List_atoms,' is a ',IA),     % split on ' is a '
     List_atoms = [First | _],                       % First = the first in the list
     string_to_atom(Str, First),                     % convert First into string
-    atomic_list_concat([_ | Clean_first],'A ',Str), % Split 'A ' off the beginning of first
-    Clean_first = [Final_first | _],                % Take the 2nd part (effectively stripping 'A ' off)
+    %atomic_list_concat([_ | Clean_first],'A ',Str), % Split 'A ' off the beginning of first
+    split_string(Str, "", "A ", Clean_first),
+    Clean_first = [Almost_first | _],                % Take the 2nd part (effectively stripping 'A ' off)
+    string_to_atom(Almost_first, Final_first),
     List_atoms = [First, Last],                     % Assign Last to last element of the original list
     assert(is_a(Final_first, Last)),                % Finally, assert the new rule
     write("Ok."), nl.                                   % Print ok
 
 
 quer(IA) :-
+    %TODO: optionally split the 'a' off, only if it is there
     atomic_list_concat(List_atoms, 'Is a ', IA),    % split into list based on 'Is a '
     atomic_list_concat(List_atoms, '' , EndStr),    % glue back into string
     string_to_atom(EndStr, SplitMe),                % convert string into atom
