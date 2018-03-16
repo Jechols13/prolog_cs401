@@ -33,7 +33,7 @@ stmt(IA) :-
 
 
 quer(IA) :-
-    atomic_list_concat(List_atoms, 'Is ', IA),    % split into list based on 'Is a '
+    atomic_list_concat(List_atoms, 'Is a ', IA),    % split into list based on 'Is a '
     atomic_list_concat(List_atoms, '' , EndStr),    % glue back into string
     string_to_atom(EndStr, SplitMe),                % convert string into atom
     atomic_list_concat(Split, ' a ', SplitMe),      % split into list around ' a ' 
