@@ -36,9 +36,11 @@ stmt(IA) :-
 
 quer(IA) :-
     %TODO: optionally split the 'a' off, only if it is there
-    atomic_list_concat(List_atoms, 'Is a ', IA),    % split into list based on 'Is a '
+    atomic_list_concat(List_atoms, 'Is ', IA),      % split into list based on 'Is a '
     atomic_list_concat(List_atoms, '' , EndStr),    % glue back into string
-    string_to_atom(EndStr, SplitMe),                % convert string into atom
+    split_string(EndStr, "", "a ", GoStr),          % OPTIONALLY split the first 'a' off of the string
+    GoStr = [GoStr1],
+    string_to_atom(GoStr1, SplitMe),                % convert string into atom
     atomic_list_concat(Split, ' a ', SplitMe),      % split into list around ' a ' 
     Split = [First, Last],                          % Assign separate variables
     (
