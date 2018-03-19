@@ -1,7 +1,7 @@
 :-style_check(-singleton).
 
 main :-
-        write('Welcome to Branwins therapy. Please enter all sentences with DOUBLE QUOTATION marks. Eneter in QUIT at any point, after your name, in time to exit.'),nl,
+        write("Please enter all sentences with DOUBLE QUOTATION marks. Eneter in QUIT at any point, after your name, in time to exit."),nl,
         write('---------------------------------------------'), nl, 
         write('---------------------------------------------'), nl,
         write('Hi, what is your name?'),nl,
@@ -24,7 +24,7 @@ read_stmts(List) :-
                 ((X == "im"), (Y == "ok")) -> write('Why just ok?');
                 ((X == "mother"); (X == "father"); (X == "sister"); (X == "brother")) -> write('Tell me more about your family');
                 (X == "why") -> write('Why should you what?');
-                (X == "movie") -> write('A good movie is Snpw pn da Bluff. Check it out?');
+                (X == "movie") -> write('A good movie is Snow on da Bluff.');
                 (X == "died") -> write('Im so sorry to hear that?');
                 (X == "food") -> write('Now is not the time to be thinking about food.');
                 (X == "why") -> write('Why should you what?');
