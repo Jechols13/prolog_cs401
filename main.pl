@@ -1,5 +1,23 @@
+% This program was written with much frustration and tears.
+% Here is the general gist:
+%  * The predicate "main" is the main entry point to this program.
+%    - Main calls itself recursively without a base case to create
+%      the main program loop.
+%  * The predicate "is_a" is the rule that the users will assert
+%  * The predicate "check_is_a" is called for the users' queries.
+%    - This allows chains like "A is a B. B is a C. Is A a C?" 
+%      to work correctly.
+%  * "stmt" and "quer" are the delegate predicates that main calls
+%     after figuring out the type of the user input.
+%  * "type_is_query" will check the first letter of the input (via
+%     the "is_I" predicates) and return true if the type is query.
+%  * "deleteLastElement" is a helper predicate used for removing the
+%    punctuation
+
 
 % is_a is a dynamic rule that take two aruments.
+% this is the rule that will be asserted/queried for everything
+% the user says/asks
 :- dynamic is_a/2.
 
 % is A a B?
@@ -25,7 +43,6 @@ stmt(IA) :-
     atomic_list_concat(List_atoms,' is a ',IA),     % split on ' is a '
     List_atoms = [First | _],                       % First = the first in the list
     string_to_atom(Str, First),                     % convert First into string
-    %atomic_list_concat([_ | Clean_first],'A ',Str), % Split 'A ' off the beginning of first
     split_string(Str, "", "A ", Clean_first),
     Clean_first = [Almost_first | _],                % Take the 2nd part (effectively stripping 'A ' off)
     string_to_atom(Almost_first, Final_first),
@@ -35,7 +52,6 @@ stmt(IA) :-
 
 
 quer(IA) :-
-    %TODO: optionally split the 'a' off, only if it is there
     atomic_list_concat(List_atoms, 'Is ', IA),      % split into list based on 'Is a '
     atomic_list_concat(List_atoms, '' , EndStr),    % glue back into string
     split_string(EndStr, "", "a ", GoStr),          % OPTIONALLY split the first 'a' off of the string
@@ -61,5 +77,3 @@ deleteLastElement([Head, Next|Tail], [Head|NTail]):-
 type_is_query(Input) :-
     Input = [FirstCode | _],
     is_I(FirstCode).
-
-% maybe this offers some insight: https://stackoverflow.com/questions/37380645/prolog-type-errors-with-dcg-library-functions
