@@ -29,12 +29,14 @@ read_stmts(List) :- %uses tail recursion to match X against any index in the lis
                  (X == "mom"); (X == "dad");
                  (X == "sister"); (X == "brother")) -> write('Tell me more about your family');
                 (X == "why") -> write('Why should you what?');
+                (X == "python") -> write('Best intro coding lanuage ever, said no one.');
+                (X == "java") -> write('Second best programming language out there. Second to prolog ofcourse');
                 (X == "you") -> write('Enough about me, tell me a little about you.');
                 (X == "movie") -> write('Justice League is a good movie. Check it out!');
-                (X == "died") -> write('Im so sorry to hear that?');
+                (X == "died") -> write('Im so sorry to hear that.');
                 (X == "food") -> write('Now is not the time to be thinking about food.');
                 (X == "good") -> write('Thats good to hear!');
-                (X == "bad") -> write('Will food make it better?');
+                (X == "bad") -> write("Will food make it better?");
                 (X == "yes") -> write('Perfect!');
                 (X == "birthday") -> write('Happy birthday!');
                 (X == "uab") -> write('SWEET! I know a cool guy named Muhammad that goes there.');
